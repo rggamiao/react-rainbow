@@ -1,39 +1,38 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  let colors = ['violet', 'blue', 'lightblue', 'green', 'greenyellow', 'yellow', 'orange', 'red'];
-  
-  return (
-    <div className="App">
-      {import React, { useState } from 'react'
+import React, { useState } from 'react'
 // Make sure to import the component we just built:
 import ColorBlock from './ColorBlock'
+import ColorForm from './ColorForm'
 
 function App(){
-    let colors = [
+    let [colors, setColors] = useState([
         'violet', 'blue',
         'lightblue', 'green',
         'greenyellow', 'yellow',
         'orange', 'red'
-    ]
-    
+    ])
+    //goes through array to place colors
     let colorMap = colors.map((color, i) => {
+      //sends back the colors with a key
         return (
-            <ColorBlock color={color} />
+            <ColorBlock key={i} color={color} />
         )
     })
+//adds new color to the array
+    const addColor = (newColor) => {
+      setColors([...colors, newColor])
+    }
 
     return (
-        <div className="App">
-            {colorMap}
-        </div>
+      <div className="App">
+        {colors.map((color, i) => 
+            <ColorBlock key={i} color={color} />
+        )}
+        <ColorForm addColor = {addColor} />
+      </div>
+  
     )
 }
-}
-    </div>
-  );
-}
+            
+
 
 export default App;
